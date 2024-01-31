@@ -77,18 +77,32 @@ class H1Cfg(LeggedRobotCfg):
             'right_ankle_joint': 0.0,
         }
 
-        dof_pos_range = {
-            'left_hip_yaw_joint': [0.0, 0.0],
-            'left_hip_roll_joint': [-0.2, -0.2],
-            'left_hip_pitch_joint': [-0.2, -0.2],
-            'left_knee_joint': [0.25, 0.25],
-            'left_ankle_joint': [0.0, 0.0],
+        # dof_pos_range = {
+        #     'left_hip_yaw_joint': [0.0, 0.0],
+        #     'left_hip_roll_joint': [-0.2, -0.2],
+        #     'left_hip_pitch_joint': [-0.2, -0.2],
+        #     'left_knee_joint': [0.25, 0.25],
+        #     'left_ankle_joint': [0.0, 0.0],
 
-            'right_hip_yaw_joint': [0.0, 0.0],
-            'right_hip_roll_joint': [-0.2, -0.2],
-            'right_hip_pitch_joint': [-0.2, -0.2],
-            'right_knee_joint': [0.25, 0.25],
-            'right_ankle_joint': [0.0, 0.0],
+        #     'right_hip_yaw_joint': [0.0, 0.0],
+        #     'right_hip_roll_joint': [-0.2, -0.2],
+        #     'right_hip_pitch_joint': [-0.2, -0.2],
+        #     'right_knee_joint': [0.25, 0.25],
+        #     'right_ankle_joint': [0.0, 0.0],
+        # }
+
+        dof_pos_range = {
+            'left_hip_yaw_joint': [-0.1, 0.1],
+            'left_hip_roll_joint': [-0.2, 0.2],
+            'left_hip_pitch_joint': [-0.2, 0.2],
+            'left_knee_joint': [0.6, 0.7],
+            'left_ankle_joint': [-0.3, 0.3],
+
+            'right_hip_yaw_joint': [-0.1, 0.1],
+            'right_hip_roll_joint': [-0.2, 0.2],
+            'right_hip_pitch_joint': [-0.2, 0.2],
+            'right_knee_joint': [0.6, 0.7],
+            'right_ankle_joint': [-0.3, 0.3],
         }
 
         dof_vel_range = {
@@ -159,14 +173,20 @@ class H1Cfg(LeggedRobotCfg):
         # file = '{LEGGED_GYM_ROOT_DIR}'\
         #     '/resources/robots/mit_humanoid/mit_humanoid_fixed_arms.urdf'
 
+        h1_urdf_version = 7
+
         # file = '{LEGGED_GYM_ROOT_DIR}'\
         #     '/resources/h1_robot_res/h1_v4.urdf'
 
-        # file = '{LEGGED_GYM_ROOT_DIR}'\
-        #     '/resources/h1_robot_res/h1_v5.urdf'
-
         file = '{LEGGED_GYM_ROOT_DIR}'\
-            '/resources/h1_robot_res/h1_v6.urdf'
+            f'/resources/h1_robot_res/h1_v{h1_urdf_version}.urdf'
+        
+        # file = '{LEGGED_GYM_ROOT_DIR}'\
+        #     '/resources/h1_robot_res/h1_v6.urdf'
+
+        print("-" * 50)
+        print(f"Using H1 v{h1_urdf_version}")
+        print("-" * 50)
 
 
         keypoints = ["pelvis"]

@@ -10,6 +10,18 @@ import torch
 
 import wandb
 
+def save_conf(exp_name):
+    # save config file
+    save_conf_base = "/mnt/hypercube/zhsha/workspace/pbrs-humanoid/config_bakcup"
+    save_conf_dir = os.path.join(save_conf_base, exp_name)
+
+    conf_to_save_ls = [
+        "/mnt/hypercube/zhsha/workspace/pbrs-humanoid/gpugym/envs/PBRS"
+    ]
+
+    for conf_dir in conf_to_save_ls:
+        os.system("cp -r {} {}".format(conf_dir, save_conf_dir))
+
 def train(args):
     env, env_cfg = task_registry.make_env(name=args.task, args=args)
     ppo_runner, train_cfg = task_registry.make_alg_runner(env=env, name=args.task, args=args)
@@ -21,6 +33,8 @@ def train(args):
         do_wandb = True
     else:
         experiment_name = f'{args.task}'
+
+    save_conf(experiment_name)
 
     # log_root = os.path.join(LEGGED_GYM_ROOT_DIR, 'logs', train_cfg.runner.experiment_name)
     # log_dir = os.path.join(log_root, datetime.now().strftime('%b%d_%H-%M-%S') + '_' + train_cfg.runner.run_name)
@@ -41,7 +55,7 @@ def train(args):
         wandb.init(project=args.wandb_project,
                 #    entity=args.wandb_entity,
                 #    group=args.wandb_group,
-                #    config=wandb.config,
+                   config=args,
                    name=experiment_name)
 
         ppo_runner.configure_wandb(wandb)

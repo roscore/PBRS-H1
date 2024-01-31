@@ -1,3 +1,25 @@
+
+
+wenyuan:
+
+```
+conda activate pbrs
+export LD_LIBRARY_PATH=/home/zhsha/miniconda3/envs/pbrs/lib
+```
+
+
+urdf dev notes
+
+| URDF File Version | Desc                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| h1_v0.urdf        | Original H1 Robot URDF File, with **dof = 19**               |
+| h1_v1.urdf        | Change the joints of the upper body from "revolute" to "fixed", and adjust their angles to appropriate positions. Therefore, we have **dof = 10** |
+| h1_v3.urdf        | Reduce the "limit effort" of the lower body joints to around **34** and increase the "limit range of freedom" to **(-6.28, 6.28)** (which is 2 $\pi$) for these joints. |
+| h1_v4.urdf        | Reset the "limit effort" of the lower body joints to its origin "limit effort". "limit effort": **34 -> around 200** |
+| h1_v5.urdf        | Limit the "limit range of freedom" of "left_hip_roll_joint" and "right_hip_roll_joint" to **(-0.78, 0.78)** (which is $\frac{1}{4} \pi$ ) |
+| h1_v6.urdf        | Limit the "limit range of freedom" of "left_hip_roll_joint" to (-0.2, 0.78), and that of "right_hip_roll_joint" to **(-0.78, 0.2)** |
+| h1_v7.urdf        | Limit the "limit range of freedom" of "left(right)_hip_roll_joint" to (-0.78, 0.78), and that of "right_hip_roll_joint" to **(-0.78, 0.78)** |
+
 # Overview #
 This repository is a port of legged_gym from the RSL research group.
 It contains the code and results of the paper "Benchmarking Potential Based Rewards for Learning Humanoid Locomotion", located here: 

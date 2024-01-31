@@ -7,5 +7,9 @@ gpuGym.egg-info/
 __pycache__
 .vscode*
 
-# wandb
+wandb
+
+config_bakcup
+
+**/*.tar
 

@@ -169,6 +169,11 @@ class H1(LeggedRobot):
     def _reward_joint_regularization(self):
         # Reward joint poses and symmetry
         error = 0.
+        # what is these index for ?
+
+        # print("joint rew pb")
+        # breakpoint()
+
         # Yaw joints regularization around 0
         error += self.sqrdexp(
             (self.dof_pos[:, 0]) / self.cfg.normalization.obs_scales.dof_pos)
