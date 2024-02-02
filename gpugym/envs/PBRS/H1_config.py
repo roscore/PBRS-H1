@@ -224,7 +224,10 @@ class H1Cfg(LeggedRobotCfg):
         # ! "Incorrect" specification of height
         # base_height_target = 0.7
         base_height_target = 0.92
-        soft_dof_pos_limit = 0.9
+
+        # soft_dof_pos_limit = 0.9
+        soft_dof_pos_limit = 1.0
+        
         soft_dof_vel_limit = 0.9
         soft_torque_limit = 0.8
 

@@ -20,6 +20,12 @@ urdf dev notes
 | h1_v6.urdf        | Limit the "limit range of freedom" of "left_hip_roll_joint" to (-0.2, 0.78), and that of "right_hip_roll_joint" to **(-0.78, 0.2)** |
 | h1_v7.urdf        | Limit the "limit range of freedom" of "left(right)_hip_roll_joint" to (-0.78, 0.78), and that of "right_hip_roll_joint" to **(-0.78, 0.78)** |
 
+| Exp name | Desc                                                         |
+| ----------------- | ------------------------------------------------------------ |
+|  HIP_ROLL_0.78_0.78_urdf_v5      | 将 left right hip roll 改回 -0.78 - 0.78, use urdf v5               |
+|  HIP_ROLL_0.78_0.78_HIP_YAW_0.78_0.78_urdf_v7      | 进一步将 left right hip yaw 限制成 -0.78 - 0.78 use urdf v7               |
+
+
 # Overview #
 This repository is a port of legged_gym from the RSL research group.
 It contains the code and results of the paper "Benchmarking Potential Based Rewards for Learning Humanoid Locomotion", located here: 
