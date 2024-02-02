@@ -173,7 +173,7 @@ class H1Cfg(LeggedRobotCfg):
         # file = '{LEGGED_GYM_ROOT_DIR}'\
         #     '/resources/robots/mit_humanoid/mit_humanoid_fixed_arms.urdf'
 
-        h1_urdf_version = 7
+        h1_urdf_version = None
 
         # file = '{LEGGED_GYM_ROOT_DIR}'\
         #     '/resources/h1_robot_res/h1_v4.urdf'
@@ -184,9 +184,7 @@ class H1Cfg(LeggedRobotCfg):
         # file = '{LEGGED_GYM_ROOT_DIR}'\
         #     '/resources/h1_robot_res/h1_v6.urdf'
 
-        print("-" * 50)
-        print(f"Using H1 v{h1_urdf_version}")
-        print("-" * 50)
+
 
 
         keypoints = ["pelvis"]
@@ -225,8 +223,8 @@ class H1Cfg(LeggedRobotCfg):
         # base_height_target = 0.7
         base_height_target = 0.92
 
-        # soft_dof_pos_limit = 0.9
-        soft_dof_pos_limit = 1.0
+        soft_dof_pos_limit = 0.9
+        # soft_dof_pos_limit = 1.0
         
         soft_dof_vel_limit = 0.9
         soft_torque_limit = 0.8

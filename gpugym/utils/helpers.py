@@ -129,11 +129,35 @@ def get_load_path(root, load_run=-1, checkpoint=-1):
     return load_path
 
 def update_cfg_from_args(env_cfg, cfg_train, args):
+    # this is a general function for updating both env_cfg and train_cfg
+    # the program will first create env, therefore, env_cfg is always created first
+    # after that, train_cfg is created
+
+
     # update env cfg from args
     if env_cfg is not None:
         # num envs
         if args.num_envs is not None:
             env_cfg.env.num_envs = args.num_envs
+
+        # more arugemnt
+        if args.task == "pbrs:H1":
+            # H1 must specify the urdf version of H1 robot
+            assert args.h1_urdf_version is not None, "Please specify the urdf version of H1 robot"
+            # args.h1_urdf_version = 999
+
+            env_cfg.asset.file = '{LEGGED_GYM_ROOT_DIR}'\
+                f'/resources/h1_robot_res/h1_v{args.h1_urdf_version}.urdf'
+
+            # print("-" * 50)
+            # print(f"Using H1 urdf version {args.h1_urdf_version}")
+            # print("-" * 50)
+
+            # breakpoint()
+            # print()
+        
+
+        # env_cfg.asset.file
 
     # update train 
     if cfg_train is not None:
@@ -152,6 +176,11 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             cfg_train.runner.load_run = args.load_run
         if args.checkpoint is not None:
             cfg_train.runner.checkpoint = args.checkpoint
+
+    # print(type(env_cfg))
+    # print(type(cfg_train))
+    # breakpoint()
+    # print()
 
     return env_cfg, cfg_train
 
@@ -175,6 +204,8 @@ def get_args():
         {"name": "--wandb_group", "type": str, "default": "training_run", "help": "Enter the group name of the runs."},
         {"name": "--reward_scale", "type": float, "help": "value to override reward scale with (which reward hard-coded in train.py)"}, # ! hacky AF
         {"name": "--pbrs", "type": int, "help": "pbrs or not (1, 0))"}, # ! hacky AF
+        # argument by szz
+        {"name":"--h1_urdf_version", "type": int, "default": None},
     ]
     # parse arguments
     args = gymutil.parse_arguments(
