@@ -156,6 +156,9 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             env_cfg.control.action_scale = args.action_scale
             print(f"action scale: {env_cfg.control.action_scale}")
 
+            assert args.ori_term_threshold is not None, "Please specify the orientation term threshold of H1 robot"
+            env_cfg.rewards.ori_term_threshold = args.ori_term_threshold
+            print(f"orientation term threshold: {env_cfg.rewards.ori_term_threshold}")
 
             print("-" * 50)
 
@@ -208,7 +211,8 @@ def get_args():
         {"name": "--pbrs", "type": int, "help": "pbrs or not (1, 0))"}, # ! hacky AF
         # argument by szz
         {"name":"--h1_urdf_version", "type": int, "default": None},
-        {"name":"--action_scale", "type" : float, "default" : None}
+        {"name":"--action_scale", "type" : float, "default" : None},
+        {"name":"--ori_term_threshold", "type" : float, "default" : None},
     ]
     # parse arguments
     args = gymutil.parse_arguments(

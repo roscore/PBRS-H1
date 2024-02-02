@@ -232,6 +232,9 @@ class H1Cfg(LeggedRobotCfg):
         only_positive_rewards = False
         tracking_sigma = 0.5
 
+        # orienation termintaion threshold, in terms of gravity vec
+        ori_term_threshold = 0.7
+
         class scales(LeggedRobotCfg.rewards.scales):
             # * "True" rewards * #
             action_rate = -1.e-3

@@ -227,6 +227,7 @@ class OnPolicyRunner:
             self.writer.add_scalar('Train/mean_reward/time', statistics.mean(locs['rewbuffer']), self.tot_time)
             self.writer.add_scalar('Train/mean_episode_length/time', statistics.mean(locs['lenbuffer']), self.tot_time)
 
+        # here tell the difference of whether using wandb
         if self.do_wandb:
             wandb_to_log['Loss/value_function'] = locs['mean_value_loss']
             wandb_to_log['Loss/surrogate'] = locs['mean_surrogate_loss']

@@ -111,18 +111,20 @@ class H1(LeggedRobot):
                 dim=-1)
         self.reset_buf = torch.any((term_contact > 1.), dim=1)
 
-        # # Termination for velocities, orientation, and low height
+        # # Termination for velocities
         # self.reset_buf |= torch.any(
         #   torch.norm(self.base_lin_vel, dim=-1, keepdim=True) > 10., dim=1)
         # self.reset_buf |= torch.any(
         #   torch.norm(self.base_ang_vel, dim=-1, keepdim=True) > 5., dim=1)
         
-        # remove at h1_v2
-        # self.reset_buf |= torch.any(
-        #   torch.abs(self.projected_gravity[:, 0:1]) > 0.7, dim=1)
-        # self.reset_buf |= torch.any(
-        #   torch.abs(self.projected_gravity[:, 1:2]) > 0.7, dim=1)
+        # reset for orientation
+        ori_term_threshold = self.cfg.rewards.ori_term_threshold
+        self.reset_buf |= torch.any(
+          torch.abs(self.projected_gravity[:, 0:1]) > ori_term_threshold, dim=1)
+        self.reset_buf |= torch.any(
+          torch.abs(self.projected_gravity[:, 1:2]) > ori_term_threshold, dim=1)
 
+        # rest for low height 
         self.reset_buf |= torch.any(self.base_pos[:, 2:3] < 0.3, dim=1)
 
         # # no terminal reward for time-outs
