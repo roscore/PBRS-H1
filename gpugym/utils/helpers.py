@@ -142,20 +142,22 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
 
         # more arugemnt
         if args.task == "pbrs:H1":
-            # H1 must specify the urdf version of H1 robot
-            assert args.h1_urdf_version is not None, "Please specify the urdf version of H1 robot"
-            # args.h1_urdf_version = 999
 
+            print("-" * 50)
+
+            # urdf version
+            assert args.h1_urdf_version is not None, "Please specify the urdf version of H1 robot"
             env_cfg.asset.file = '{LEGGED_GYM_ROOT_DIR}'\
                 f'/resources/h1_robot_res/h1_v{args.h1_urdf_version}.urdf'
+            print(env_cfg.asset.file)
 
-            # print("-" * 50)
-            # print(f"Using H1 urdf version {args.h1_urdf_version}")
-            # print("-" * 50)
+            # action scale
+            assert args.action_scale is not None, "Please specify the action scale of H1 robot"
+            env_cfg.control.action_scale = args.action_scale
+            print(f"action scale: {env_cfg.control.action_scale}")
 
-            # breakpoint()
-            # print()
-        
+
+            print("-" * 50)
 
         # env_cfg.asset.file
 
@@ -206,6 +208,7 @@ def get_args():
         {"name": "--pbrs", "type": int, "help": "pbrs or not (1, 0))"}, # ! hacky AF
         # argument by szz
         {"name":"--h1_urdf_version", "type": int, "default": None},
+        {"name":"--action_scale", "type" : float, "default" : None}
     ]
     # parse arguments
     args = gymutil.parse_arguments(

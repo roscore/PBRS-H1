@@ -401,6 +401,15 @@ class LeggedRobot(BaseTask):
                                     - self.dof_pos) \
                     - self.d_gains*self.dof_vel
 
+
+            # is_all_zeros = torch.all(actions == 0).item()
+
+            # if not is_all_zeros:
+            #     breakpoint()
+            #     print()
+            # else:
+            #     print("all zero")
+
         elif self.cfg.control.control_type=="T":
             torques = actions * self.cfg.control.action_scale
 

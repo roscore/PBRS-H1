@@ -184,9 +184,6 @@ class H1Cfg(LeggedRobotCfg):
         # file = '{LEGGED_GYM_ROOT_DIR}'\
         #     '/resources/h1_robot_res/h1_v6.urdf'
 
-
-
-
         keypoints = ["pelvis"]
 
         end_effectors = ["left_ankle_link", "right_ankle_link"]

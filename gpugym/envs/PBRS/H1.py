@@ -187,6 +187,10 @@ class H1(LeggedRobot):
         error += self.sqrdexp(
             (self.dof_pos[:, 2] + self.dof_pos[:, 7])
             / self.cfg.normalization.obs_scales.dof_pos)
+
+        breakpoint()
+        print()
+
         return error/4
 
     def _reward_ankle_regularization(self):
