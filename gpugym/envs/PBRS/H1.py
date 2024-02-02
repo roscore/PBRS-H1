@@ -188,8 +188,9 @@ class H1(LeggedRobot):
             (self.dof_pos[:, 2] + self.dof_pos[:, 7])
             / self.cfg.normalization.obs_scales.dof_pos)
 
-        breakpoint()
-        print()
+
+        # breakpoint()
+        # print()
 
         return error/4
 

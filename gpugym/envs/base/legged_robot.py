@@ -612,6 +612,7 @@ class LeggedRobot(BaseTask):
         
         self._rigid_body_pos = self._rigid_body_state.view(self.num_envs, self.num_bodies, 13)[..., 0:3]
         self._rigid_body_vel = self._rigid_body_state.view(self.num_envs, self.num_bodies, 13)[..., 7:10]
+        # dof state 有包含 pos 和 vel，这里把 pos 和 vel 分开
         self.dof_pos = self.dof_state.view(self.num_envs, self.num_dof, 2)[..., 0]
         self.dof_vel = self.dof_state.view(self.num_envs, self.num_dof, 2)[..., 1]
         self.base_pos = self.root_states[:, 0:3]
@@ -894,6 +895,18 @@ class LeggedRobot(BaseTask):
         self.termination_contact_indices = torch.zeros(len(termination_contact_names), dtype=torch.long, device=self.device, requires_grad=False)
         for i in range(len(termination_contact_names)):
             self.termination_contact_indices[i] = self.gym.find_actor_rigid_body_handle(self.envs[0], self.actor_handles[0], termination_contact_names[i])
+
+
+        # make a mapping from index to body names
+        self.index_to_body_name = {}
+        for name in body_names:
+            idx = self.gym.find_actor_rigid_body_handle(self.envs[0], self.actor_handles[0], name)
+            self.index_to_body_name[idx] = name
+
+        # print("index bodyname dict done")
+        # breakpoint()
+        # print()
+
 
 
     def _get_env_origins(self):

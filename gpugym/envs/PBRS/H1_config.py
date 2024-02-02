@@ -173,14 +173,16 @@ class H1Cfg(LeggedRobotCfg):
         # file = '{LEGGED_GYM_ROOT_DIR}'\
         #     '/resources/robots/mit_humanoid/mit_humanoid_fixed_arms.urdf'
 
-        h1_urdf_version = None
+        # h1_urdf_version = None
+
+        # # file = '{LEGGED_GYM_ROOT_DIR}'\
+        # #     '/resources/h1_robot_res/h1_v4.urdf'
 
         # file = '{LEGGED_GYM_ROOT_DIR}'\
-        #     '/resources/h1_robot_res/h1_v4.urdf'
-
-        file = '{LEGGED_GYM_ROOT_DIR}'\
-            f'/resources/h1_robot_res/h1_v{h1_urdf_version}.urdf'
+        #     f'/resources/h1_robot_res/h1_v{h1_urdf_version}.urdf'
         
+        file = None
+
         # file = '{LEGGED_GYM_ROOT_DIR}'\
         #     '/resources/h1_robot_res/h1_v6.urdf'
 

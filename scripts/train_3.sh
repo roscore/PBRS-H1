@@ -7,9 +7,9 @@ python gpugym/scripts/train.py \
     --task pbrs:H1 \
     --headless \
     --wandb_project "pbrs3" \
-    --wandb_name "h1_v16" \
-    --h1_urdf_version 5 \
-    --action_scale 2.0
+    --wandb_name "h1_v23" \
+    --h1_urdf_version 8 \
+    --action_scale 10.0
 
 # # debug mode
 # python gpugym/scripts/train.py \
