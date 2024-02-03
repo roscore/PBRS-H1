@@ -54,7 +54,12 @@ def play(args):
     # camera_vel = np.array([1., 1., 0.])
     # camera_direction = np.array(env_cfg.viewer.lookat) - np.array(env_cfg.viewer.pos)
 
-    camera_position = np.array([-5, -5, 6], dtype=np.float64)
+    # camera_position = np.array([-5, -5, 6], dtype=np.float64)
+
+
+    camera_position = np.array([-7, -7, 3], dtype=np.float64)
+
+
     camera_lookat = np.array([5., 5, 2.], dtype=np.float64)
     camera_direction = camera_lookat - camera_position
     camera_vel = np.array([1., 1., 0.])
