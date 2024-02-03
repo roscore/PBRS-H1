@@ -4,7 +4,7 @@ export CUDA_VISIBLE_DEVICES=4
 export LD_LIBRARY_PATH=/home/zhsha/miniconda3/envs/pbrs/lib
 
 # save train script
-WAND_NAME="h1_v41"
+WAND_NAME="h1_v47"
 CONFIG_BACKUP_DIR="/mnt/hypercube/zhsha/workspace/pbrs-humanoid/config_bakcup/${WAND_NAME}"
 mkdir -p $CONFIG_BACKUP_DIR
 script_path="$(readlink -f "$0")"
@@ -18,9 +18,11 @@ python gpugym/scripts/train.py \
     --h1_urdf_version 8 \
     --action_scale 0.5 \
     --ori_term_threshold 1.0 \
-    --ankle_stiffness 45.0 \
+    --ankle_stiffness 60.0 \
+    --hip_pitch_stiffness 150.0 \
     --lin_vel_x_min 0.0 \
     --lin_vel_x_max 4.5 \
     --lin_vel_y_ab 0.75 \
     --ang_vel_yaw_abs 2.0
+
 

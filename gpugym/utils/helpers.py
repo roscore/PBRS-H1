@@ -127,32 +127,61 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             env_cfg.control.action_scale = args.action_scale
             print(f"action scale: {env_cfg.control.action_scale}")
 
+            # gravity reset threshold
             assert args.ori_term_threshold is not None, "Please specify the orientation term threshold of H1 robot"
             env_cfg.rewards.ori_term_threshold = args.ori_term_threshold
             print(f"orientation term threshold: {env_cfg.rewards.ori_term_threshold}")
 
+            # lin x range
             assert args.lin_vel_x_min is not None and args.lin_vel_x_max is not None, "Please specify the linear velocity range of H1 robot"
             env_cfg.commands.ranges.lin_vel_x = [args.lin_vel_x_min, args.lin_vel_x_max]
             print(f"lin x range: {env_cfg.commands.ranges.lin_vel_x}")
 
+            # lin y range
             assert args.lin_vel_y_abs is not None, "Please specify the absolute value of linear velocity in y direction of H1 robot"
             env_cfg.commands.ranges.lin_vel_y = [-args.lin_vel_y_abs, args.lin_vel_y_abs]
             print(f"lin y range: {env_cfg.commands.ranges.lin_vel_y}")
 
+            # ang yaw range
             assert args.ang_vel_yaw_abs is not None, "Please specify the absolute value of angular velocity in yaw direction of H1 robot"
             env_cfg.commands.ranges.ang_vel_yaw = [-args.ang_vel_yaw_abs, args.ang_vel_yaw_abs]
             print(f"ang yaw range: {env_cfg.commands.ranges.ang_vel_yaw}")
 
+            # ankle stiffness
             assert args.ankle_stiffness is not None, "Please specify the ankle stiffness of H1 robot"
             env_cfg.control.stiffness["left_ankle_joint"] = args.ankle_stiffness
             env_cfg.control.stiffness["right_ankle_joint"] = args.ankle_stiffness
             print(f"ankle stiffness: {env_cfg.control.stiffness['left_ankle_joint']}")
 
+            # hip stiffness
+            assert args.hip_pitch_stiffness is not None, "Please specify the hip stiffness of H1 robot"
+            env_cfg.control.stiffness["left_hip_pitch_joint"] = args.hip_pitch_stiffness
+            env_cfg.control.stiffness["right_hip_pitch_joint"] = args.hip_pitch_stiffness
+            print(f"hip stiffness: {env_cfg.control.stiffness['left_hip_pitch_joint']}")
+
             print("-" * 50)
 
 
         # we also need to parser argument for mit robot later
+        elif args.task == "pbrs:humanoid":
+            print("-" * 50)
 
+             # lin x range
+            assert args.lin_vel_x_min is not None and args.lin_vel_x_max is not None, "Please specify the linear velocity range of H1 robot"
+            env_cfg.commands.ranges.lin_vel_x = [args.lin_vel_x_min, args.lin_vel_x_max]
+            print(f"lin x range: {env_cfg.commands.ranges.lin_vel_x}")
+
+            # lin y range
+            assert args.lin_vel_y_abs is not None, "Please specify the absolute value of linear velocity in y direction of H1 robot"
+            env_cfg.commands.ranges.lin_vel_y = [-args.lin_vel_y_abs, args.lin_vel_y_abs]
+            print(f"lin y range: {env_cfg.commands.ranges.lin_vel_y}")
+
+            # ang yaw range
+            assert args.ang_vel_yaw_abs is not None, "Please specify the absolute value of angular velocity in yaw direction of H1 robot"
+            env_cfg.commands.ranges.ang_vel_yaw = [-args.ang_vel_yaw_abs, args.ang_vel_yaw_abs]
+            print(f"ang yaw range: {env_cfg.commands.ranges.ang_vel_yaw}")
+
+            print("-" * 50)
 
         # env_cfg.asset.file
 
@@ -173,11 +202,6 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             cfg_train.runner.load_run = args.load_run
         if args.checkpoint is not None:
             cfg_train.runner.checkpoint = args.checkpoint
-
-    # print(type(env_cfg))
-    # print(type(cfg_train))
-    # breakpoint()
-    # print()
 
     return env_cfg, cfg_train
 
@@ -210,6 +234,7 @@ def get_args():
         {"name" : "--lin_vel_y_abs", "type" : float, "default" : None},
         {"name" : "--ang_vel_yaw_abs", "type" : float, "default" : None},
         {"name" : "--ankle_stiffness", "type" : float, "default" : None},
+        {"name" : "--hip_pitch_stiffness", "type" : float, "default" : None},
     ]
     # parse arguments
     args = gymutil.parse_arguments(
