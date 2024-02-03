@@ -160,6 +160,18 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             env_cfg.rewards.ori_term_threshold = args.ori_term_threshold
             print(f"orientation term threshold: {env_cfg.rewards.ori_term_threshold}")
 
+            assert args.lin_vel_x_min is not None and args.lin_vel_x_max is not None, "Please specify the linear velocity range of H1 robot"
+            env_cfg.commands.ranges.lin_vel_x = [args.lin_vel_x_min, args.lin_vel_x_max]
+            print(f"lin x range: {env_cfg.commands.ranges.lin_vel_x}")
+
+            assert args.lin_vel_y_abs is not None, "Please specify the absolute value of linear velocity in y direction of H1 robot"
+            env_cfg.commands.ranges.lin_vel_y = [-args.lin_vel_y_abs, args.lin_vel_y_abs]
+            print(f"lin y range: {env_cfg.commands.ranges.lin_vel_y}")
+
+            assert args.ang_vel_yaw_abs is not None, "Please specify the absolute value of angular velocity in yaw direction of H1 robot"
+            env_cfg.commands.ranges.ang_vel_yaw = [-args.ang_vel_yaw_abs, args.ang_vel_yaw_abs]
+            print(f"ang yaw range: {env_cfg.commands.ranges.ang_vel_yaw}")
+
             print("-" * 50)
 
         # env_cfg.asset.file
@@ -213,6 +225,10 @@ def get_args():
         {"name":"--h1_urdf_version", "type": int, "default": None},
         {"name":"--action_scale", "type" : float, "default" : None},
         {"name":"--ori_term_threshold", "type" : float, "default" : None},
+        {"name":"--lin_vel_x_min", "type" :float, "default" : None},
+        {"name":"--lin_vel_x_max", "type" :float, "default" : None},
+        {"name" : "--lin_vel_y_abs", "type" : float, "default" : None},
+        {"name" : "--ang_vel_yaw_abs", "type" : float, "default" : None},
     ]
     # parse arguments
     args = gymutil.parse_arguments(
