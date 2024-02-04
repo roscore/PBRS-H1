@@ -91,19 +91,41 @@ class H1Cfg(LeggedRobotCfg):
         #     'right_ankle_joint': [0.0, 0.0],
         # }
 
-        dof_pos_range = {
-            'left_hip_yaw_joint': [-0.1, 0.1],
-            'left_hip_roll_joint': [-0.2, 0.2],
-            'left_hip_pitch_joint': [-0.2, 0.2],
-            'left_knee_joint': [0.6, 0.7],
-            'left_ankle_joint': [-0.3, 0.3],
+        # # unfixed dof pos range
+        # dof_pos_range = {
+        #     'left_hip_yaw_joint': [-0.1, 0.1],
+        #     'left_hip_roll_joint': [-0.2, 0.2],
+        #     'left_hip_pitch_joint': [-0.2, 0.2],
+        #     'left_knee_joint': [0.6, 0.7],
+        #     'left_ankle_joint': [-0.3, 0.3],
 
-            'right_hip_yaw_joint': [-0.1, 0.1],
-            'right_hip_roll_joint': [-0.2, 0.2],
-            'right_hip_pitch_joint': [-0.2, 0.2],
-            'right_knee_joint': [0.6, 0.7],
-            'right_ankle_joint': [-0.3, 0.3],
-        }
+        #     'right_hip_yaw_joint': [-0.1, 0.1],
+        #     'right_hip_roll_joint': [-0.2, 0.2],
+        #     'right_hip_pitch_joint': [-0.2, 0.2],
+        #     'right_knee_joint': [0.6, 0.7],
+        #     'right_ankle_joint': [-0.3, 0.3],
+        # }
+
+        # this should be set by arg parse
+        dof_pos_range = None
+
+        # test dof pos range
+        
+
+        # # fixed dof pos range
+        # dof_pos_range = {
+        #     'left_hip_yaw_joint': [0.0, 0.0],
+        #     'left_hip_roll_joint': [0.0, 0.0],
+        #     'left_hip_pitch_joint': [0.0, 0.0],
+        #     'left_knee_joint': [0.0, 0.0],
+        #     'left_ankle_joint': [0.0, 0.0],
+
+        #     'right_hip_yaw_joint': [0.0, 0.0],
+        #     'right_hip_roll_joint': [0.0, 0.0],
+        #     'right_hip_pitch_joint': [0.0, 0.0],
+        #     'right_knee_joint': [0.0, 0.0],
+        #     'right_ankle_joint': [0.0, 0.0],
+        # }
 
         dof_vel_range = {
             'left_hip_yaw_joint': [0.0, 0.0],

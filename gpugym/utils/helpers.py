@@ -177,38 +177,46 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             env_cfg.control.stiffness["right_knee_joint"] = args.knee_stiffness
             print(f"knee stiffness: {env_cfg.control.stiffness['left_knee_joint']}")
 
-            assert args.fixed_range is not None, "specify fixed range"
-            if args.fixed_range:
-                # to do 
-                env_cfg.init_state.dof_pos_range =  {
-                    'left_hip_yaw_joint': [0.0, 0.0],
-                    'left_hip_roll_joint': [0.0, 0.0],
-                    'left_hip_pitch_joint': [0.0, 0.0],
-                    'left_knee_joint': [0.0, 0.0],
-                    'left_ankle_joint': [0.0, 0.0],
+            # knee range default
+            knee_range_low = 0.6
+            knee_range_high = 0.7
 
-                    'right_hip_yaw_joint': [0.0, 0.0],
-                    'right_hip_roll_joint': [0.0, 0.0],
-                    'right_hip_pitch_joint': [0.0, 0.0],
-                    'right_knee_joint': [0.0, 0.0],
-                    'right_ankle_joint': [0.0, 0.0],
-                }
-                print("dof pos range fixed")
-            else:
-                env_cfg.init_state.dof_pos_range =  {
-                    'left_hip_yaw_joint': [-0.1, 0.1],
-                    'left_hip_roll_joint': [-0.2, 0.2],
-                    'left_hip_pitch_joint': [-0.2, 0.2],
-                    'left_knee_joint': [0.6, 0.7],
-                    'left_ankle_joint': [-0.3, 0.3],
+            if args.knee_range_low is not None and args.knee_range_high is not None:
+                knee_range_low = args.knee_range_low
+                knee_range_high = args.knee_range_high
 
-                    'right_hip_yaw_joint': [-0.1, 0.1],
-                    'right_hip_roll_joint': [-0.2, 0.2],
-                    'right_hip_pitch_joint': [-0.2, 0.2],
-                    'right_knee_joint': [0.6, 0.7],
-                    'right_ankle_joint': [-0.3, 0.3],
+                print(f"knee range set to: {knee_range_low}, {knee_range_high}")
+
+            env_cfg.init_state.dof_pos_range = {
+                'left_hip_yaw_joint': [-0.1, 0.1],
+                'left_hip_roll_joint': [-0.2, 0.2],
+                'left_hip_pitch_joint': [-0.2, 0.2],
+                'left_knee_joint': [knee_range_low, knee_range_high],
+                'left_ankle_joint': [-0.3, 0.3],
+
+                'right_hip_yaw_joint': [-0.1, 0.1],
+                'right_hip_roll_joint': [-0.2, 0.2],
+                'right_hip_pitch_joint': [-0.2, 0.2],
+                'right_knee_joint': [knee_range_low, knee_range_high],
+                'right_ankle_joint': [-0.3, 0.3],
+            }
+
+            # overall stiffness
+            if args.overall_stiffness is not None:
+                overall_stiffness = args.overall_stiffness
+                env_cfg.control.stiffness = {
+                    'left_hip_yaw_joint': overall_stiffness,
+                    'left_hip_roll_joint': overall_stiffness,
+                    'left_hip_pitch_joint': overall_stiffness,
+                    'left_knee_joint': overall_stiffness,
+                    'left_ankle_joint': overall_stiffness,
+                    'right_hip_yaw_joint': overall_stiffness,
+                    'right_hip_roll_joint': overall_stiffness,
+                    'right_hip_pitch_joint': overall_stiffness,
+                    'right_knee_joint': overall_stiffness,
+                    'right_ankle_joint': overall_stiffness,
                 }
-                print("dof pos range unfixed")
+                print(f"overall stiffness: {overall_stiffness}")
 
 
             print("-" * 50)
@@ -293,7 +301,9 @@ def get_args():
         {"name" : "--knee_stiffness", "type" : float, "default" : None},
 
         # if use folded knee dof pos range
-        {"name" : "--fixed_range", "type" : bool, "default" : False},
+        {"name" : "--knee_range_low", "type" : float, "default" : None},
+        {"name" : "--knee_range_high", "type" : float, "default" : None},
+        {"name" : "--overall_stiffness", "type" : float, "default" : None},
     ]
     # parse arguments
     args = gymutil.parse_arguments(
