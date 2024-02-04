@@ -171,6 +171,46 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             env_cfg.control.damping["right_hip_pitch_joint"] = args.hip_pitch_damping
             print(f"hip damping: {env_cfg.control.damping['left_hip_pitch_joint']}")
 
+            # knee stiffness
+            assert args.knee_stiffness is not None, "Please specify the knee stiffness of H1 robot"
+            env_cfg.control.stiffness["left_knee_joint"] = args.knee_stiffness
+            env_cfg.control.stiffness["right_knee_joint"] = args.knee_stiffness
+            print(f"knee stiffness: {env_cfg.control.stiffness['left_knee_joint']}")
+
+            assert args.fixed_range is not None, "specify fixed range"
+            if args.fixed_range:
+                # to do 
+                env_cfg.init_state.dof_pos_range =  {
+                    'left_hip_yaw_joint': [0.0, 0.0],
+                    'left_hip_roll_joint': [0.0, 0.0],
+                    'left_hip_pitch_joint': [0.0, 0.0],
+                    'left_knee_joint': [0.0, 0.0],
+                    'left_ankle_joint': [0.0, 0.0],
+
+                    'right_hip_yaw_joint': [0.0, 0.0],
+                    'right_hip_roll_joint': [0.0, 0.0],
+                    'right_hip_pitch_joint': [0.0, 0.0],
+                    'right_knee_joint': [0.0, 0.0],
+                    'right_ankle_joint': [0.0, 0.0],
+                }
+                print("dof pos range fixed")
+            else:
+                env_cfg.init_state.dof_pos_range =  {
+                    'left_hip_yaw_joint': [-0.1, 0.1],
+                    'left_hip_roll_joint': [-0.2, 0.2],
+                    'left_hip_pitch_joint': [-0.2, 0.2],
+                    'left_knee_joint': [0.6, 0.7],
+                    'left_ankle_joint': [-0.3, 0.3],
+
+                    'right_hip_yaw_joint': [-0.1, 0.1],
+                    'right_hip_roll_joint': [-0.2, 0.2],
+                    'right_hip_pitch_joint': [-0.2, 0.2],
+                    'right_knee_joint': [0.6, 0.7],
+                    'right_ankle_joint': [-0.3, 0.3],
+                }
+                print("dof pos range unfixed")
+
+
             print("-" * 50)
 
 
@@ -241,6 +281,7 @@ def get_args():
         {"name":"--h1_urdf_version", "type": int, "default": None},
         {"name":"--action_scale", "type" : float, "default" : None},
         {"name":"--ori_term_threshold", "type" : float, "default" : None},
+        # velocity 
         {"name":"--lin_vel_x_min", "type" :float, "default" : None},
         {"name":"--lin_vel_x_max", "type" :float, "default" : None},
         {"name" : "--lin_vel_y_abs", "type" : float, "default" : None},
@@ -249,6 +290,10 @@ def get_args():
         {"name" : "--hip_pitch_stiffness", "type" : float, "default" : None},
         {"name" : "--ankle_damping", "type" : float, "default" : None},
         {"name" : "--hip_pitch_damping", "type" : float, "default" : None},
+        {"name" : "--knee_stiffness", "type" : float, "default" : None},
+
+        # if use folded knee dof pos range
+        {"name" : "--fixed_range", "type" : bool, "default" : False},
     ]
     # parse arguments
     args = gymutil.parse_arguments(

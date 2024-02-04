@@ -28,6 +28,10 @@ class Humanoid(LeggedRobot):
         in_contact = torch.cat(
             (in_contact[:, 0].unsqueeze(1), in_contact[:, 1].unsqueeze(1)),
             dim=1)
+
+        # # observe contact
+        # breakpoint()
+
         self.commands[:, 0:2] = torch.where(
             torch.norm(self.commands[:, 0:2], dim=-1, keepdim=True) < 0.5,
             0., self.commands[:, 0:2].double()).float()

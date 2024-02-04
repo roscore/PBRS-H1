@@ -8,6 +8,8 @@ from gpugym.utils import  get_args, export_policy, export_critic, task_registry,
 import numpy as np
 import torch
 
+from tqdm import tqdm
+
 
 def play(args):
     env_cfg, train_cfg = task_registry.get_cfgs(name=args.task)
@@ -47,6 +49,7 @@ def play(args):
     logger = Logger(env.dt)
     robot_index = 0  # which robot is used for logging
     joint_index = 2  # which joint is used for logging
+    # stop_state_log = 1000  # number of steps before plotting states
     stop_state_log = 1000  # number of steps before plotting states
     stop_rew_log = env.max_episode_length + 1  # number of steps before print average episode rewards
     
@@ -66,12 +69,11 @@ def play(args):
 
     env.set_camera(camera_position, camera_position + camera_direction)
     
-
     img_idx = 0
 
     play_log = []
     env.max_episode_length = 1000./env.dt
-    for i in range(10*int(env.max_episode_length)):
+    for i in tqdm(range(10*int(env.max_episode_length))):
         actions = policy(obs.detach())
         obs, _, rews, dones, infos = env.step(actions.detach())
         if RECORD_FRAMES:
@@ -101,13 +103,18 @@ def play(args):
                 + env.torques[robot_index, :].detach().cpu().numpy().tolist()
             )
         elif i==stop_state_log:
-            np.savetxt('../analysis/data/play_log.csv', play_log, delimiter=',')
+            # np.savetxt('../analysis/data/play_log.csv', play_log, delimiter=',')
             # logger.plot_states()
+            pass
+
+        
         if  0 < i < stop_rew_log:
+
             if infos["episode"]:
                 num_episodes = torch.sum(env.reset_buf).item()
-                # if num_episodes>0:
-                    # logger.log_rewards(infos["episode"], num_episodes)
+                if num_episodes>0:
+                    logger.log_rewards(infos["episode"], num_episodes)
+
         elif i==stop_rew_log:
             logger.print_rewards()
 
