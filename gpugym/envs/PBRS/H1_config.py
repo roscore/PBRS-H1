@@ -138,19 +138,19 @@ class H1Cfg(LeggedRobotCfg):
             'right_ankle_joint': overall_stiffness,
         }
 
-        overall_dampling = 5.
+        overall_damping = 5.
 
         damping = {
-            'left_hip_yaw_joint': overall_dampling,
-            'left_hip_roll_joint': overall_dampling,
-            'left_hip_pitch_joint': overall_dampling,
-            'left_knee_joint': overall_dampling,
-            'left_ankle_joint': overall_dampling,
-            'right_hip_yaw_joint': overall_dampling,
-            'right_hip_roll_joint': overall_dampling,
-            'right_hip_pitch_joint': overall_dampling,
-            'right_knee_joint': overall_dampling,
-            'right_ankle_joint': overall_dampling
+            'left_hip_yaw_joint': overall_damping,
+            'left_hip_roll_joint': overall_damping,
+            'left_hip_pitch_joint': overall_damping,
+            'left_knee_joint': overall_damping,
+            'left_ankle_joint': overall_damping,
+            'right_hip_yaw_joint': overall_damping,
+            'right_hip_roll_joint': overall_damping,
+            'right_hip_pitch_joint': overall_damping,
+            'right_knee_joint': overall_damping,
+            'right_ankle_joint': overall_damping
         }
 
 

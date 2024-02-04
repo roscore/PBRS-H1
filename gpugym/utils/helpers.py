@@ -153,16 +153,28 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             env_cfg.control.stiffness["right_ankle_joint"] = args.ankle_stiffness
             print(f"ankle stiffness: {env_cfg.control.stiffness['left_ankle_joint']}")
 
-            # hip stiffness
+            # hip pitch stiffness
             assert args.hip_pitch_stiffness is not None, "Please specify the hip stiffness of H1 robot"
             env_cfg.control.stiffness["left_hip_pitch_joint"] = args.hip_pitch_stiffness
             env_cfg.control.stiffness["right_hip_pitch_joint"] = args.hip_pitch_stiffness
             print(f"hip stiffness: {env_cfg.control.stiffness['left_hip_pitch_joint']}")
 
+            # ankle damping 
+            assert args.ankle_damping is not None, "Please specify the ankle damping of H1 robot"
+            env_cfg.control.damping["left_ankle_joint"] = args.ankle_damping
+            env_cfg.control.damping["right_ankle_joint"] = args.ankle_damping
+            print(f"ankle damping: {env_cfg.control.damping['left_ankle_joint']}")
+
+            # hip pitch damping
+            assert args.hip_pitch_damping is not None, "Please specify the hip damping of H1 robot"
+            env_cfg.control.damping["left_hip_pitch_joint"] = args.hip_pitch_damping
+            env_cfg.control.damping["right_hip_pitch_joint"] = args.hip_pitch_damping
+            print(f"hip damping: {env_cfg.control.damping['left_hip_pitch_joint']}")
+
             print("-" * 50)
 
 
-        # we also need to parser argument for mit robot later
+        # mit robot config
         elif args.task == "pbrs:humanoid":
             print("-" * 50)
 
@@ -235,6 +247,8 @@ def get_args():
         {"name" : "--ang_vel_yaw_abs", "type" : float, "default" : None},
         {"name" : "--ankle_stiffness", "type" : float, "default" : None},
         {"name" : "--hip_pitch_stiffness", "type" : float, "default" : None},
+        {"name" : "--ankle_damping", "type" : float, "default" : None},
+        {"name" : "--hip_pitch_damping", "type" : float, "default" : None},
     ]
     # parse arguments
     args = gymutil.parse_arguments(
