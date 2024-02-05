@@ -201,6 +201,27 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
                 'right_ankle_joint': [-0.3, 0.3],
             }
 
+            # fix defualt joint pos
+            if args.fix_default_joint_pos is not None:
+                if args.fix_default_joint_pos:
+                    fix_default_joint_pos = [0.0, 0.0]
+                    key_ls = [
+                        'left_hip_yaw_joint',
+                        'left_hip_roll_joint',
+                        'left_hip_pitch_joint',
+                        'left_ankle_joint',
+
+                        'right_hip_yaw_joint',
+                        'right_hip_roll_joint',
+                        'right_hip_pitch_joint',
+                        'right_ankle_joint',
+                    ]
+
+                    for key in key_ls:
+                        env_cfg.init_state.dof_pos_range[key] = fix_default_joint_pos
+
+                    print(f"fix default joint pos: {fix_default_joint_pos}")
+                    
             # overall stiffness
             if args.overall_stiffness is not None:
                 overall_stiffness = args.overall_stiffness
@@ -304,6 +325,9 @@ def get_args():
         {"name" : "--knee_range_low", "type" : float, "default" : None},
         {"name" : "--knee_range_high", "type" : float, "default" : None},
         {"name" : "--overall_stiffness", "type" : float, "default" : None},
+
+        # fix default joint position other than knee
+        {"name" : "--fix_default_joint_pos", "type" : bool, "default" : None},
     ]
     # parse arguments
     args = gymutil.parse_arguments(

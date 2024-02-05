@@ -15,7 +15,7 @@ python gpugym/scripts/train.py \
     --headless \
     --wandb_project "pbrs3" \
     --wandb_name $WAND_NAME \
-        --h1_urdf_version 8 \
+    --h1_urdf_version 8 \
     --action_scale 0.5 \
     --ori_term_threshold 1.0 \
     --ankle_stiffness 60.0 \

@@ -7,7 +7,7 @@ export DISPLAY=localhost:10.0
 # h1 robot
 python gpugym/scripts/play.py \
     --task pbrs:H1 \
-    --wandb_name h1_v35 \
+    --wandb_name h1_v69 \
     --h1_urdf_version 8 \
     --action_scale 0.5 \
     --ori_term_threshold 1.0 \
@@ -20,8 +20,8 @@ python gpugym/scripts/play.py \
     --lin_vel_x_max 4.5 \
     --lin_vel_y_ab 0.75 \
     --ang_vel_yaw_abs 2.0 \
-    --knee_range_low 0.5 \
-    --knee_range_high 0.6 
+    --knee_range_low 0.9 \
+    --knee_range_high 1.0 
 
 # # mit robot
 # python gpugym/scripts/play.py \

@@ -109,8 +109,22 @@ class H1Cfg(LeggedRobotCfg):
         # this should be set by arg parse
         dof_pos_range = None
 
-        # test dof pos range
-        
+        # # test dof pos range
+        # knee_range_low = 0.6
+        # knee_range_high = 0.7
+        # dof_pos_range = {
+        #     'left_hip_yaw_joint': [0.0, 0.0],
+        #     'left_hip_roll_joint': [0.0, 0.0],
+        #     'left_hip_pitch_joint': [0.0, 0.0],
+        #     'left_knee_joint': [knee_range_low, knee_range_high],
+        #     'left_ankle_joint': [0.0, 0.0],
+
+        #     'right_hip_yaw_joint': [0.0, 0.0],
+        #     'right_hip_roll_joint': [0.0, 0.0],
+        #     'right_hip_pitch_joint': [0.0, 0.0],
+        #     'right_knee_joint': [knee_range_low, knee_range_high],
+        #     'right_ankle_joint': [0.0, 0.0],
+        # }
 
         # # fixed dof pos range
         # dof_pos_range = {
