@@ -53,17 +53,11 @@ def play(args):
     stop_state_log = 1000  # number of steps before plotting states
     stop_rew_log = env.max_episode_length + 1  # number of steps before print average episode rewards
     
-    # camera_position = np.array(env_cfg.viewer.pos, dtype=np.float64)
-    # camera_vel = np.array([1., 1., 0.])
-    # camera_direction = np.array(env_cfg.viewer.lookat) - np.array(env_cfg.viewer.pos)
-
-    # camera_position = np.array([-5, -5, 6], dtype=np.float64)
-
-
+    
     camera_position = np.array([-7, -7, 3], dtype=np.float64)
-
-
     camera_lookat = np.array([5., 5, 2.], dtype=np.float64)
+
+
     camera_direction = camera_lookat - camera_position
     camera_vel = np.array([1., 1., 0.])
 
@@ -72,7 +66,12 @@ def play(args):
     img_idx = 0
     # img dir
     wandb_name = args.wandb_name
-    img_dir = os.path.join(LEGGED_GYM_ROOT_DIR, "imgs", wandb_name)
+
+    img_dir_name = wandb_name
+    if args.img_dir_name is not None:
+        img_dir_name = args.img_dir_name
+
+    img_dir = os.path.join(LEGGED_GYM_ROOT_DIR, "imgs", img_dir_name)
     os.makedirs(img_dir, exist_ok=True)
 
     play_log = []

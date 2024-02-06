@@ -140,11 +140,13 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
             # lin y range
             assert args.lin_vel_y_abs is not None, "Please specify the absolute value of linear velocity in y direction of H1 robot"
             env_cfg.commands.ranges.lin_vel_y = [-args.lin_vel_y_abs, args.lin_vel_y_abs]
+            # env_cfg.commands.ranges.lin_vel_y = [args.lin_vel_y_abs, args.lin_vel_y_abs]
             print(f"lin y range: {env_cfg.commands.ranges.lin_vel_y}")
 
             # ang yaw range
             assert args.ang_vel_yaw_abs is not None, "Please specify the absolute value of angular velocity in yaw direction of H1 robot"
             env_cfg.commands.ranges.ang_vel_yaw = [-args.ang_vel_yaw_abs, args.ang_vel_yaw_abs]
+            # env_cfg.commands.ranges.ang_vel_yaw = [args.ang_vel_yaw_abs, args.ang_vel_yaw_abs]
             print(f"ang yaw range: {env_cfg.commands.ranges.ang_vel_yaw}")
 
             # ankle stiffness
@@ -329,6 +331,8 @@ def get_args():
         # fix default joint position other than knee
         {"name" : "--fix_default_joint_pos", "type" : bool, "default" : None},
 
+
+        {"name" : "--img_dir_name", "type" : str, "default" : None},
 
         # # following arguments are used for play.py
         # {"name" : "--num"}

@@ -21,3 +21,6 @@ overlap_scr
 
 **/*.gif
 
+**/*.tar
+**/*.mp4
+
