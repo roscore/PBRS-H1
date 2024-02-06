@@ -1,6 +1,6 @@
 # Train Unitree H1 Robot with PBRS Algorithm Report
 
-> Zhizhou Sha 2024.2.xx
+> Zhizhou Sha 2024.2.7
 
 Since the last report, where we enabled the H1 Robot to basically stand up and walk, I have proceeded with further improvements.
 
