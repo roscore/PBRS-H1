@@ -6,7 +6,23 @@ Since the last report, where we enabled the H1 Robot to basically stand up and w
 
 ## 0 Current Best Results
 
-h1_v84 is the best result I have reached so far.
+`h1_v84 ` is the best result I have reached so far.
+
+From a reward perspective, **`h1_v84 ` has already reached a level almost comparable to the MIT Robot originally used by PBRS!**
+
+<img src="Report/image-20240207031042586.png" alt="image-20240207031042586" style="zoom:50%;" />
+
+Teaser video for `h1_v84`
+
+<center>
+    <center style="width:60%;">
+        <video controls>
+          <source src="./videos/teaser2.mp4" type="video/mp4">
+        </video>
+        <p>h1_v84</p>
+    </center>
+</center>
+
 
 
 ## 1 Generalization Test 
