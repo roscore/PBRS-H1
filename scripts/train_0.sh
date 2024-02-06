@@ -4,7 +4,7 @@ export CUDA_VISIBLE_DEVICES=0
 export LD_LIBRARY_PATH=/home/zhsha/miniconda3/envs/pbrs/lib
 
 # save train script
-WAND_NAME="h1_v76"
+WAND_NAME="h1_v77"
 CONFIG_BACKUP_DIR="/mnt/hypercube/zhsha/workspace/pbrs-humanoid/config_bakcup/${WAND_NAME}"
 mkdir -p $CONFIG_BACKUP_DIR
 script_path="$(readlink -f "$0")"
@@ -27,6 +27,6 @@ python gpugym/scripts/train.py \
     --lin_vel_x_max 4.5 \
     --lin_vel_y_ab 0.75 \
     --ang_vel_yaw_abs 2.0 \
-    --knee_range_low 0.6 \
-    --knee_range_high 0.7 \
+    --knee_range_low 0.8 \
+    --knee_range_high 0.9 \
     --fix_default_joint_pos 1

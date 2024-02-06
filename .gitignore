@@ -13,3 +13,7 @@ config_bakcup
 
 **/*.tar
 
+imgs
+
+overlap_scr
+

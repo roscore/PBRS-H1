@@ -23,7 +23,7 @@ def play(args):
     env_cfg.domain_rand.push_robots = False #True
     env_cfg.domain_rand.push_interval_s = 2
     env_cfg.domain_rand.max_push_vel_xy = 1.0
-    env_cfg.init_state.reset_ratio = 0.8 # seems useless
+    # env_cfg.init_state.reset_ratio = 0.8 # seems useless
 
     # prepare environment
     env, _ = task_registry.make_env(name=args.task, args=args, env_cfg=env_cfg)
@@ -70,6 +70,10 @@ def play(args):
     env.set_camera(camera_position, camera_position + camera_direction)
     
     img_idx = 0
+    # img dir
+    wandb_name = args.wandb_name
+    img_dir = os.path.join(LEGGED_GYM_ROOT_DIR, "imgs", wandb_name)
+    os.makedirs(img_dir, exist_ok=True)
 
     play_log = []
     env.max_episode_length = 1000./env.dt
@@ -78,7 +82,10 @@ def play(args):
         obs, _, rews, dones, infos = env.step(actions.detach())
         if RECORD_FRAMES:
             if i % 2:
-                filename = os.path.join(LEGGED_GYM_ROOT_DIR, 'logs', train_cfg.runner.experiment_name, 'exported', 'frames', f"{img_idx}.png")
+                filename = os.path.join(img_dir, f"{img_idx}.png")
+
+                # filename = os.path.join(LEGGED_GYM_ROOT_DIR, 'logs', train_cfg.runner.experiment_name, 'exported', 'frames', f"{img_idx}.png")
+
                 env.gym.write_viewer_image_to_file(env.viewer, filename)
                 img_idx += 1
         if MOVE_CAMERA:
@@ -121,7 +128,7 @@ def play(args):
 if __name__ == '__main__':
     EXPORT_POLICY = False
     EXPORT_CRITIC = False
-    RECORD_FRAMES = False
+    RECORD_FRAMES = True
     MOVE_CAMERA = False
     args = get_args()
     play(args)
