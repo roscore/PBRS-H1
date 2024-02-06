@@ -328,6 +328,10 @@ def get_args():
 
         # fix default joint position other than knee
         {"name" : "--fix_default_joint_pos", "type" : bool, "default" : None},
+
+
+        # # following arguments are used for play.py
+        # {"name" : "--num"}
     ]
     # parse arguments
     args = gymutil.parse_arguments(

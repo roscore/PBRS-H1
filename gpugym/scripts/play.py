@@ -82,12 +82,18 @@ def play(args):
         obs, _, rews, dones, infos = env.step(actions.detach())
         if RECORD_FRAMES:
             if i % 2:
-                filename = os.path.join(img_dir, f"{img_idx}.png")
+                filename = os.path.join(img_dir, f"{str(img_idx).zfill(3)}.png")
 
                 # filename = os.path.join(LEGGED_GYM_ROOT_DIR, 'logs', train_cfg.runner.experiment_name, 'exported', 'frames', f"{img_idx}.png")
 
                 env.gym.write_viewer_image_to_file(env.viewer, filename)
                 img_idx += 1
+
+                # terminate when img idx == 200
+                if img_idx == 200:
+                    print("img idx is 200")
+                    break
+
         if MOVE_CAMERA:
             camera_position += camera_vel * env.dt
             env.set_camera(camera_position, camera_position + camera_direction)

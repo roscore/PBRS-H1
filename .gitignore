@@ -17,3 +17,7 @@ imgs
 
 overlap_scr
 
+**/*.png
+
+**/*.gif
+
