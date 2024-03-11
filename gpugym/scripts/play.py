@@ -53,13 +53,18 @@ def play(args):
     stop_state_log = 1000  # number of steps before plotting states
     stop_rew_log = env.max_episode_length + 1  # number of steps before print average episode rewards
     
-    
-    camera_position = np.array([-7, -7, 3], dtype=np.float64)
-    camera_lookat = np.array([5., 5, 2.], dtype=np.float64)
 
+    # camera_position = np.array([-7, -7, 3], dtype=np.float64)
+    # camera_lookat = np.array([5., 5, 2.], dtype=np.float64)
+
+    # cam_pos_x = 14
+    # cam_tgt_x = cam_pos_x - 12
+
+    camera_position = np.array([12, -3, 1.5], dtype=np.float64)
+    camera_lookat = np.array([0, 7, 0], dtype=np.float64)
 
     camera_direction = camera_lookat - camera_position
-    camera_vel = np.array([1., 1., 0.])
+    camera_vel = np.array([1, 0, 0.], dtype=np.float64)
 
     env.set_camera(camera_position, camera_position + camera_direction)
     
@@ -134,6 +139,6 @@ if __name__ == '__main__':
     EXPORT_POLICY = False
     EXPORT_CRITIC = False
     RECORD_FRAMES = True
-    MOVE_CAMERA = False
+    MOVE_CAMERA = True
     args = get_args()
     play(args)

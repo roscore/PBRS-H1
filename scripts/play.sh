@@ -186,7 +186,7 @@ python gpugym/scripts/play.py \
     --knee_range_low 0.8 \
     --knee_range_high 0.9 \
     --fix_default_joint_pos 1 \
-    --img_dir_name "teaser"
+    --img_dir_name "teaser2"
 
 # # h1_v84
 # python gpugym/scripts/play.py \

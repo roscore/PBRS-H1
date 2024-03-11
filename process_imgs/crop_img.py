@@ -19,7 +19,7 @@ def crop_img(input_img_path):
     
     # Setting the points for cropped image
     left = width / 4
-    top = height_base * 1.5
+    top = height_base * 1
     right = 3 * width / 4  
     bottom = top + 2 * height_base
     
