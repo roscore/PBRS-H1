@@ -2,7 +2,7 @@
 
 This project is adapted from [pbrs-humanoid repo](https://github.com/se-hwan/pbrs-humanoid/)
 
-A detailed report please refer to the [project page](https://jamessand.github.io/PBRS-H1/)
+For details, please refer to the [project page](https://jamessand.github.io/PBRS-H1/)
 
 After setting up the enviornment, run the following command to get the best result.
 
