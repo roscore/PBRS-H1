@@ -1,30 +1,21 @@
 
 
-wenyuan:
+This project is adapted from [pbrs-humanoid repo](https://github.com/se-hwan/pbrs-humanoid/)
+
+
+After setting up the enviornment, run the following command to get the best result.
 
 ```
-conda activate pbrs
-export LD_LIBRARY_PATH=/home/zhsha/miniconda3/envs/pbrs/lib
+bash script/train_6.sh
 ```
 
+Training Log can be find on [your wandb](https://wandb.ai)
 
-urdf dev notes
 
-| URDF File Version | Desc                                                         |
-| ----------------- | ------------------------------------------------------------ |
-| h1_v0.urdf        | Original H1 Robot URDF File, with **dof = 19**               |
-| h1_v1.urdf        | Change the joints of the upper body from "revolute" to "fixed", and adjust their angles to appropriate positions. Therefore, we have **dof = 10** |
-| h1_v3.urdf        | Reduce the "limit effort" of the lower body joints to around **34** and increase the "limit range of freedom" to **(-6.28, 6.28)** (which is 2 $\pi$) for these joints. |
-| h1_v4.urdf        | Reset the "limit effort" of the lower body joints to its origin "limit effort". "limit effort": **34 -> around 200** |
-| h1_v5.urdf        | Limit the "limit range of freedom" of "left_hip_roll_joint" and "right_hip_roll_joint" to **(-0.78, 0.78)** (which is $\frac{1}{4} \pi$ ) |
-| h1_v6.urdf        | Limit the "limit range of freedom" of "left_hip_roll_joint" to (-0.2, 0.78), and that of "right_hip_roll_joint" to **(-0.78, 0.2)** |
-| h1_v7.urdf        | Limit the "limit range of freedom" of "left(right)_hip_roll_joint" to (-0.78, 0.78), and that of "right_hip_roll_joint" to **(-0.78, 0.78)** |
+***
 
-| Exp name | Desc                                                         |
-| ----------------- | ------------------------------------------------------------ |
-|  HIP_ROLL_0.78_0.78_urdf_v5      | 将 left right hip roll 改回 -0.78 - 0.78, use urdf v5               |
-|  HIP_ROLL_0.78_0.78_HIP_YAW_0.78_0.78_urdf_v7      | 进一步将 left right hip yaw 限制成 -0.78 - 0.78 use urdf v7               |
 
+below are original readme
 
 # Overview #
 This repository is a port of legged_gym from the RSL research group.
